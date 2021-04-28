@@ -5,3 +5,10 @@ C:\Users\Admin\Desktop\C#\war\obj\Debug\war.csprojAssemblyReference.cache
 C:\Users\Admin\Desktop\C#\war\obj\Debug\war.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\C#\war\obj\Debug\war.exe
 C:\Users\Admin\Desktop\C#\war\obj\Debug\war.pdb
+C:\Users\Admin\Desktop\C#\war\War\bin\Debug\war.exe.config
+C:\Users\Admin\Desktop\C#\war\War\bin\Debug\war.exe
+C:\Users\Admin\Desktop\C#\war\War\bin\Debug\war.pdb
+C:\Users\Admin\Desktop\C#\war\War\obj\Debug\war.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\C#\war\War\obj\Debug\war.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\C#\war\War\obj\Debug\war.exe
+C:\Users\Admin\Desktop\C#\war\War\obj\Debug\war.pdb
