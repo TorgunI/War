@@ -20,7 +20,6 @@ namespace war
             Health = 0;
             Damage = 0;
             AbillityCounter = 0;
-            ChargeAbility = 0;
         }
 
         public Medic(int number, int health, int damage)
@@ -34,8 +33,6 @@ namespace war
             Health = health;
             Damage = damage;
             AbillityCounter = 0;
-            _random = new Random();
-            ChargeAbility = _random.Next(1, 5);
         }
 
         public override void UseAbillity(Soldier ally)

@@ -9,6 +9,7 @@ namespace war
     abstract class Soldier
     {
         protected Random _random = new Random();
+
         public bool IsTargetEnemy { get; protected set; }
         public bool IsGunReady { get; protected set; }
         public bool IsAvoid { get; protected set; }

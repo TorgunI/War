@@ -9,8 +9,9 @@ namespace war
     class Squad
     {
         private List<Soldier> _soldiers;
-        private Soldier Frontmen { get; set; }
         private static Random _rand = new Random(DateTime.Now.Millisecond);
+
+        private Soldier Frontmen { get; set; }
 
         public Squad()
         {
