@@ -42,7 +42,7 @@ namespace war
             return Status.IsAvoid;
         }
 
-        public bool GetGunState()
+        public bool GetGunLoadState()
         {
             return Status.IsGunLoaded;
         }
@@ -89,6 +89,10 @@ namespace war
         public virtual void Heal(Soldier ally)
         {
             if (Health < MaxHealth)
+            {
+                ally.Health += Random.Next(40, 70);
+            }
+            else
             {
                 ally.Health += Random.Next(10, 30);
             }

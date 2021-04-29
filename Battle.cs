@@ -66,7 +66,7 @@ namespace war
             EndStage();
         }
 
-        public void InitStage()
+        private void InitStage()
         {
             _squadLeft.ChooseRandomFrontmen();
             _squadRight.ChooseRandomFrontmen();

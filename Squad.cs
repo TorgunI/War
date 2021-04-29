@@ -58,18 +58,13 @@ namespace war
             return healthSquad;
         }
 
-        //public int GetSquadSize()
-        //{
-        //    return _soldiers.Count;
-        //}
-
         public Soldier ChooseRandomFrontmen()
         {
             List<Soldier> readySoldiers = new List<Soldier>();
 
             foreach (var soldier in _soldiers)
             {
-                if(soldier.GetGunState() || soldier.AbillityCounter == 0)
+                if(soldier.GetGunLoadState() == true || soldier.AbillityCounter == 0)
                 {
                     readySoldiers.Add(soldier);
                 }
@@ -95,7 +90,7 @@ namespace war
         {
             foreach (var soldier in _soldiers)
             {
-                if (soldier.AbillityCounter == 0 && soldier.GetGunState())
+                if (soldier.AbillityCounter == 0 && soldier.GetGunLoadState() == true)
                 {
                     return false;
                 }
