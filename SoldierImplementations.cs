@@ -9,25 +9,15 @@ namespace war
     class Medic : Soldier
     {
         public int ChargeAbility { get; private set; }
-        public Medic()
+
+        public Medic() : base()
         {
-            Specialty = "Медик";
-            IsTargetEnemy = false;
-            IsGunReady = false;
-            IsAvoid = false;
-            Number = 0;
-            MaxHealth = 0;
-            Health = 0;
-            Damage = 0;
-            AbillityCounter = 0;
+
         }
 
         public Medic(int number, int health, int damage)
         {
             Specialty = "Медик";
-            IsTargetEnemy = false;
-            IsGunReady = false;
-            IsAvoid = false;
             Number = number;
             MaxHealth = health;
             Health = health;
@@ -44,24 +34,17 @@ namespace war
 
     class Infantryman : Soldier
     {
-        public Infantryman()
+        public Infantryman() : base()
         {
-            Specialty = "Штурмовик";
-            IsTargetEnemy = false;
-            IsGunReady = false;
-            IsAvoid = false;
-            Number = 0;
-            MaxHealth = 0;
-            Health = 0;
-            Damage = 0;
-        }
 
+        }
         public Infantryman(int number, int health, int damage)
         {
+            Status.SetTarget(true);
+            Status.SetLoadGun(true);
+            Status.SetAvoid(false);
+
             Specialty = "Штурмовик";
-            IsTargetEnemy = true;
-            IsGunReady = true;
-            IsAvoid = false;
             Number = number;
             MaxHealth = health;
             Health = health;
@@ -70,32 +53,24 @@ namespace war
 
         public override void UseAbillity(Soldier enemy)
         {
-            Health += _random.Next(10, 20);
-            AbillityCounter = _random.Next(1, 3);
+            Health += Random.Next(10, 20);
+            AbillityCounter = Random.Next(1, 3);
         }
     }
 
     class Sniper : Soldier
     {
-        public Sniper()
+        public Sniper() : base()
         {
-            Specialty = "Снайпер";
-            IsTargetEnemy = false;
-            IsGunReady = false;
-            IsAvoid = false;
-            Number = 0;
-            MaxHealth = 0;
-            Health = 0;
-            Damage = 0;
-            AbillityCounter = 0;
-        }
 
+        }
         public Sniper(int number, int health, int damage)
         {
+            Status.SetTarget(true);
+            Status.SetLoadGun(true);
+            Status.SetAvoid(false);
+
             Specialty = "Снайпер";
-            IsTargetEnemy = true;
-            IsGunReady = true;
-            IsAvoid = false;
             Number = number;
             MaxHealth = health;
             Health = health;
@@ -105,7 +80,7 @@ namespace war
 
         public override void UseAbillity(Soldier soldier)
         {
-            IsAvoid = true;
+            Status.SetAvoid(true);
             AbillityCounter = 3;
         }
     }

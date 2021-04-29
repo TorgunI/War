@@ -9,9 +9,11 @@ namespace war
     class Squad
     {
         private List<Soldier> _soldiers;
+
         private static Random _rand = new Random(DateTime.Now.Millisecond);
 
-        private Soldier Frontmen { get; set; }
+        public int SoldiersCount => _soldiers.Count;
+        public Soldier Frontman { get; private set; }
 
         public Squad()
         {
@@ -40,9 +42,9 @@ namespace war
             }
         }
 
-        public void TakeAction(Squad enemySquad)
+        public void TakeAction(Soldier enemyFrontman)
         {
-            Frontmen.TryAttack(enemySquad.Frontmen, GetRandomSoldier(_soldiers));
+            Frontman.TryAttack(enemyFrontman, GetRandomSoldier(_soldiers));
         }
 
         public int GetHealthSquad()
@@ -56,10 +58,10 @@ namespace war
             return healthSquad;
         }
 
-        public int GetSquadSize()
-        {
-            return _soldiers.Count;
-        }
+        //public int GetSquadSize()
+        //{
+        //    return _soldiers.Count;
+        //}
 
         public Soldier ChooseRandomFrontmen()
         {
@@ -67,7 +69,7 @@ namespace war
 
             foreach (var soldier in _soldiers)
             {
-                if(soldier.IsGunReady || soldier.AbillityCounter == 0)
+                if(soldier.GetGunState() || soldier.AbillityCounter == 0)
                 {
                     readySoldiers.Add(soldier);
                 }
@@ -75,13 +77,13 @@ namespace war
 
             if(readySoldiers.Count == 0)
             {
-                Frontmen = GetRandomSoldier(_soldiers);
+                Frontman = GetRandomSoldier(_soldiers);
             }
             else
             {
-                Frontmen = GetRandomSoldier(readySoldiers);
+                Frontman = GetRandomSoldier(readySoldiers);
             }
-            return Frontmen;
+            return Frontman;
         }
 
         public Soldier GetRandomSoldier(List<Soldier> soldiers)
@@ -93,7 +95,7 @@ namespace war
         {
             foreach (var soldier in _soldiers)
             {
-                if (soldier.AbillityCounter == 0 && soldier.IsGunReady)
+                if (soldier.AbillityCounter == 0 && soldier.GetGunState())
                 {
                     return false;
                 }
@@ -112,9 +114,9 @@ namespace war
 
         public bool TryDeleteDeadSoldier()
         {
-            if (Frontmen.Health <= 0)
+            if (Frontman.Health <= 0)
             {
-                _soldiers.Remove(Frontmen);
+                _soldiers.Remove(Frontman);
                 return true;
             }
             return false;

@@ -8,14 +8,14 @@ namespace war
 {
     class Battle
     {
-        int _raund = 0;
+        private  int _round = 0;
 
         private Squad _squadLeft;
         private Squad _squadRight;
 
         public Battle()
         {
-            _raund = 1;
+            _round = 1;
             _squadLeft = new Squad();
             _squadRight = new Squad();
         }
@@ -75,10 +75,10 @@ namespace war
         private void FightStage()
         {
             Console.WriteLine("Западный отряд атакует!");
-            _squadRight.TakeAction(_squadLeft);
+            _squadRight.TakeAction(_squadLeft.Frontman);
 
             Console.WriteLine("Восточный отряд атакует!");
-            _squadLeft.TakeAction(_squadRight);
+            _squadLeft.TakeAction(_squadRight.Frontman);
         }
 
         private void EndStage()
@@ -89,7 +89,7 @@ namespace war
             if(IsSquadsReady())
             {
                 Console.WriteLine("Новый раунд!");
-                _raund++;
+                _round++;
             }
         }
 
@@ -117,7 +117,7 @@ namespace war
                 return true;
             }
 
-            Console.WriteLine("Raund: " + _raund);
+            Console.WriteLine("Raund: " + _round);
             Console.WriteLine("\nСилы западного отряда: " + _squadLeft.GetHealthSquad());
             Console.WriteLine("Силы восточного отряда: " + _squadRight.GetHealthSquad() + "\n");
             return false;
@@ -125,12 +125,12 @@ namespace war
 
         private bool IsGameReady()
         {
-            if (_squadLeft.GetSquadSize() < 0)
+            if (_squadLeft.SoldiersCount < 0)
             {
                 Console.WriteLine("Левый отряд не создан!");
                 return false;
             }
-            else if (_squadRight.GetSquadSize() < 0)
+            else if (_squadRight.SoldiersCount < 0)
             {
                 Console.WriteLine("Правый отряд не создан!");
                 return false;

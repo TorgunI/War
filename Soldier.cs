@@ -8,11 +8,9 @@ namespace war
 {
     abstract class Soldier
     {
-        protected Random _random = new Random();
+        protected Status Status;
+        protected Random Random = new Random();
 
-        public bool IsTargetEnemy { get; protected set; }
-        public bool IsGunReady { get; protected set; }
-        public bool IsAvoid { get; protected set; }
         public int Number { get; protected set; }
         public int MaxHealth { get; protected set; }
         public int Health { get; protected set; }
@@ -22,19 +20,51 @@ namespace war
 
         public abstract void UseAbillity(Soldier soldier);
 
+
+        public Soldier()
+        {
+            Status = new Status();
+
+            Status.SetTarget(false);
+            Status.SetLoadGun(false);
+            Status.SetAvoid(false);
+
+            Number = 0;
+            MaxHealth = 0;
+            Health = 0;
+            Damage = 0;
+            AbillityCounter = 0;
+            Specialty = "Новобранец";
+        }
+
+        public bool GetAvoidState()
+        {
+            return Status.IsAvoid;
+        }
+
+        public bool GetGunState()
+        {
+            return Status.IsGunLoaded;
+        }
+
+        public bool GetTargetState()
+        {
+            return Status.IsTargetEnemy;
+        }
+
         public void TryAttack(Soldier enemy, Soldier ally)
         {
-            if (IsGunReady)
+            if (Status.IsGunLoaded)
             {
                 Attack(enemy);
             }
             else if (AbillityCounter == 0)
             {
-                if (IsTargetEnemy)
+                if (Status.IsTargetEnemy)
                 {
                     UseAbillity(enemy);
                 }
-                else if (IsTargetEnemy == false)
+                else if (Status.IsTargetEnemy == false)
                 {
                     UseAbillity(ally);
                 }
@@ -43,25 +73,25 @@ namespace war
 
         public void Attack(Soldier enemy)
         {
-            if(enemy.IsAvoid == false)
+            if(enemy.Status.IsAvoid == false)
             {
                 enemy.Health -= Damage;
             }
 
-            IsGunReady = false;
+            Status.SetLoadGun(false);
+        }
+
+        public void ReloadGun()
+        {
+            Status.SetLoadGun(true);
         }
 
         public virtual void Heal(Soldier ally)
         {
             if (Health < MaxHealth)
             {
-                ally.Health += _random.Next(10, 30);
+                ally.Health += Random.Next(10, 30);
             }
-        }
-
-        public void ReloadGun()
-        {
-            IsGunReady = true;
         }
 
         public void CooldownAbility()
